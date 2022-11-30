@@ -1,0 +1,406 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+:root{
+      --bg-color: rgb(255, 255, 255);
+      --nav-color: rgb(255, 255, 255);
+      --font-color: rgb(0, 0, 0);
+      --navlinks-color: rgba(112, 112, 112, 0.7);
+      --button-color: rgb(25, 255, 25);
+}
+.navbar, .navbar__link > a {
+      color: var(--font-color);
+}
+.bar, .bar::before, .bar::after {
+      background: var(--font-color);
+}  
+.fleches, .fleches::before {
+      background-color: var(--font-color);
+} 
+.etat1, .etat2, .etat3, .etat4 {
+      border: solid 0px var(--font-color);
+} 
+.show-fleche1 .etat1, .show-fleche2 .etat2, .show-fleche3 .etat3, .show-fleche4 .etat4 {
+      border: solid 1px var(--font-color);
+}
+body {
+      background-color: var(--bg-color);
+      margin: 0;
+      font-size: var(--font-size);
+      font-family: "Poppins", sans-serif;
+}
+* {
+      box-sizing: border-box;
+      outline: none;
+      margin: 0;
+      padding: 0;
+}
+/* tableau des scores */
+      .score {
+            border-radius: 20px;
+            height: 115px;
+            width: 350px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            background-color: white;
+            transform: translate(-50%, 25%);
+            box-shadow:  0 0 20px 2px black;
+      }
+      /* inscription point */
+      .table_score {
+            padding: 10px;
+            font-weight: 1000;
+            font-size: 18px;
+            user-select: none;
+      }
+      .score_, .inscr_score {
+            text-align: center;
+            margin-left: 2px;
+            transform: translateX(10px);
+            height: 20px;
+            width: 20px;
+      }
+      .score_ {
+            border: solid 1px black;
+            border-radius: 25%;
+      }
+      .score p {
+            margin-top: -5px;
+      }
+      #right {
+            transform: translateX(20px);
+      }
+/* terrain de baseball avec bases */
+      /* terrain de baseball / carré vert */
+      .terrain {
+            z-index: 1;
+            background-color: green;
+            height: 350px;
+            width: 350px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            border-radius: 25px;
+            transform: translate(-50%, 20%);
+            box-shadow: 0 0 20px 5px black;
+      }
+      /* terrain de baseball partie terre */
+      .terrain:before {
+            content: '';
+            position: absolute;
+            background-color: brown;
+            height: 300px;
+            width: 300px;
+            transform: translate(0%, 50px);
+            border-top-right-radius: 55%;
+            border-bottom-left-radius: 25px;
+      }
+      /* centre terrain */
+      .carre {
+            height: 150px;
+            width: 150px;
+            transform: translate(45%, 90%);
+            background-color: green;
+      }
+      /* centre terrain bord creusé */
+      .carre:before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: brown;
+            box-shadow: 140px 0 0 0 brown,
+                  0px 140px 0 0 brown,
+                  140px 140px 0 0 brown;
+            border-radius: 20px;
+            transform: translate(-40%, -40%);
+      }
+      /* chemain entre les bases */
+      .chemainX {
+            background-color: white;
+            height: 3px;
+            width: 90px;
+            transform: translate(108%, -57.5px);
+            box-shadow: 0px -168px 0 0 white;
+      }
+      .chemainY {
+            background-color: white;
+            height: 90px;
+            width: 3px;
+            transform: translate(58px, -187.5px);
+            box-shadow: 167px 0px 0 0 white;
+      }
+      /* taille des bases */
+      .base_div {
+            position: relative;
+            width: 50px;
+            height: 50px;
+      }
+      /* aspect des bases */
+      .base {
+            border: none;
+            border-radius: 15px;
+            width: 50px;
+            height: 50px;
+      } 
+      /* position bases */
+      .base_1 {
+            transform: translate(80%, 225%);
+      }
+      .base_2 {
+            transform: translate(390%, 125%);
+      }
+      .base_3 {
+            transform: translate(390%, -285%);
+      }
+      .base_4 {
+            transform: translate(80%, -385%);
+      }
+      /* boutton play */
+      .button_play {
+            height: 40px;
+            width: 120px;
+            transform: translate(100%, -130%);
+      }
+      .play {
+            height: 40px;
+            width: 120px;
+            border-radius: 50px;
+            border: none;
+            box-shadow:  0 0 20px 2px black;
+      }
+/* menu bases */
+      /* menu burger */
+      .navbar {
+            z-index: 2;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            font-size: 1.1rem;
+            background: var(--nav-color);
+      }
+      /* bouton menu burger */
+      .burger {
+            display: block;
+            position: relative;
+            padding: 0;
+            width: 45px;
+            height: 45px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+      }
+      /* bar du bouton burger */
+      .bar {
+            display: block;
+            width: 45px;
+            height: 4px;
+            border-radius: 3px;
+            transition: all 0.25s ease-in-out;
+      }
+      .bar::before, .bar::after {
+            content: "";
+            width: 45px;
+            height: 4px;
+            position: absolute;
+            left: 0;
+            border-radius: 3px;
+            transition: all 0.25s ease-in-out;
+      }
+            /* position des bar */
+            .bar::before {
+                  transform: translateY(-12px);
+            }
+            .bar::after {
+                  transform: translateY(12px);
+            }
+      /* liste du menu */
+      .navbar__links {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 0;
+            height: calc(100vh - 65px);
+            position: absolute;
+            top: 65px;
+            left: 0;
+            backdrop-filter: blur(1px);
+            transition: all 0.5s ease-in-out;
+            display: flex; 
+            background: var(--navlinks-color);
+      }
+      /* elements ans la liste */
+      .navbar__link {
+            padding: 0 10px;
+            transform: translateX(100%);
+            transition: all 0.5s ease-in-out;
+      }
+      .navbar__link > a {
+            text-decoration: none;
+            display: block;
+            padding: 1rem;
+            font-size: 1.6rem;
+            transition: all 0.5s ease-in-out;
+      }
+      /* position logo */
+      .logo {
+            display: flex;
+            position: relative;
+            transform: translateX(calc(100% - 35px));
+      }
+      /* position ouverture menu */
+      .burger{
+            transform: translateX(-250%);
+      }
+      /* aspect et position de la liste dans le menu */
+      ul {
+            list-style: none;
+      }
+      li {
+            margin-top: -25px;
+      }
+      li:first-child {
+            margin-top: -10px;
+      }
+      /* indice ouverture/fermeture description des bases */
+      .fleches {
+            position: relative;
+            left: 100px;
+            top: -25px;
+            height: 3px;
+            width: 15px;
+            transform: rotate(45deg);
+            transition: all 0.5s ease-in-out;
+      }
+      .fleches::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            height: 3px;
+            width: 15px;
+            transform: rotate(-90deg);
+      }
+      /* mode sombre/claire */
+      .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            transform: translate(10px, 8px);
+      }
+      .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+      }
+      .slider2 {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+      }
+      .slider2:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+      }
+      input:checked + .slider2 {
+            background-color: #2196F3;
+      } 
+      input:focus + .slider2 {
+            box-shadow: 0 0 1px #2196F3;
+      }
+      input:checked + .slider2:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+      }
+      .slider2.round {
+            border-radius: 34px;
+      }
+      .slider2.round:before {
+            border-radius: 50%;
+      }
+      /* description des etats des bases */
+      .etat1, .etat2, .etat3, .etat4 {
+            font-size: 15px;
+            width: 125px;
+            height: 0;
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+      }
+      /* position des etats */
+      .etat1 > p:first-child, .etat2 > p:first-child, .etat3 > p:first-child, .etat4 > p:first-child {
+            margin-top: 2px;
+      }
+      .etat1 *, .etat2 *, .etat3 *, .etat4 * {
+            margin-top: -3px;
+      }
+      .etat1 > p, .etat2 > p, .etat3 > p, .etat4 > p {
+            margin-left: 15px;
+      }
+      /* modification valeur volume */
+      .slider {
+            width: 80px;
+            height: 14px;
+            margin-left: 20px;
+      }
+      #slider1, #slider2, #slider3, #slider4 {
+            width: 80px;
+            height: 14px;
+            transform: translateY(-3px);
+      }
+/* animation */
+      /* apparition menu */
+      .show-nav .navbar__links {
+            width: 100%;
+            border-top-right-radius: 0;
+            transform: translateX(0);
+      }
+      /* animation bouton burger */
+      .show-nav .navbar__link {
+            transform: translateX(0);
+      }
+      .show-nav .bar {
+            background: transparent;
+      }
+      .show-nav .bar::before {
+            transform: rotate(45deg);
+      }
+      .show-nav .bar::after {
+            transform: rotate(-45deg);
+      }
+      /* animation fleches */
+      .show-fleche_all .fleche_all {
+            transform: rotate(135deg) translateY(-5px);
+      }
+      .show-fleche1 .fleche1 {
+            transform: rotate(135deg) translateY(-5px);
+      }
+      .show-fleche2 .fleche2 {
+            transform: rotate(135deg) translateY(-5px);
+      }
+      .show-fleche3 .fleche3 {
+            transform: rotate(135deg) translateY(-5px);
+      }
+      .show-fleche4 .fleche4 {
+            transform: rotate(135deg) translateY(-5px);
+      }
+      /* affichage description des bases */
+      .show-fleche1 .etat1, .show-fleche2 .etat2, .show-fleche3 .etat3, .show-fleche4 .etat4 {
+            height: 100px;
+            border-radius: 18px;
+      }
