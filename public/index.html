@@ -9,78 +9,70 @@
 </head>
 <body>
       <!-- menu pour voire l'etat, le volume, la batterie et le fichier son des 4 bases -->
-      <nav class="navbar" role="navigation"> 
-            <h1 class="logo">BlindBase</h1> 
-            <ul class="navbar__links">
+      <nav class="navbar show-nav" role="navigation"> 
+            <h1 class="logo" id="text_color">BlindBase</h1> 
+            <ul class="navbar__links" id="text_color">
                   <li class="navbar__link">
-                        <a href="#">
-                              <strong class="theme">Theme sombre</strong> 
+                        <p href="#">
+                              <strong class="theme" id="text_color">Theme sombre</strong> 
                               <label class="switch">
                                     <input type="checkbox" id="checkbox" onclick="checkBox()">
                                     <span class="slider2 round"></span>
                               </label>
-                        </a>
+                        </p>
                   </li>
-                  <li class="navbar__link all">
-                        <a href="#">
-                              <strong>All<div class="fleche_all fleches"></div></strong>
-                        </a>
+                  <li class="navbar__link">
+                        <p href="#" id="all">
+                              <strong id="text_color">All<div class="fleche_all fleches" id="text_color"></div></strong>
+                        </p>
                   </li>
-                  <li class="navbar__link first">
-                        <a href="#">
-                              <strong>Base 1<div class="fleche1 fleches"></div></strong>
+                  <li class="navbar__link" >
+                        <p href="#" id="Fleche0">
+                              <strong id="text_color">Base 1<div class="fleche0 fleches" id="text_color"></div></strong>
+                              <div class="etat0">
+                                    <p class="on_off0" id="text_color">OFF</p>
+                                    <p id="text_color">Volume: <span class="value1">0</span>%</p>
+                                    <div class="slider">
+                                          <input type="range" min="0" max="100" value="0" id="slider1" oninput="sliderJs('slider1', '.value1')" >
+                                    </div>
+                              </div>
+                        </p>
+                  </li>
+                  <li class="navbar__link">
+                        <p href="#" id="Fleche1">
+                              <strong id="text_color">Base 2<div class="fleche1 fleches" id="text_color"></div></strong>
                               <div class="etat1">
-                                    <p class="on_off1">OFF</p>
-                                    <p>Volume: <span class="value1">50</span>%</p>
+                                    <p class="on_off1" id="text_color">OFF</p>
+                                    <p id="text_color">Volume: <span class="value2">0</span>%</p>
                                     <div class="slider">
-                                          <input type="range" min="0" max="100" value="50" id="slider1" oninput="sliderJs('slider1', '.value1', 1)">
+                                          <input type="range" min="0" max="100" value="0" id="slider2" oninput="sliderJs('slider2', '.value2')">
                                     </div>
-                                    <p>Batterie: 63%</p>
-                                    <p>Fichier son</p>
                               </div>
-                        </a>
+                        </p>
                   </li>
-                  <li class="navbar__link second">
-                        <a href="#">
-                              <strong>Base 2<div class="fleche2 fleches"></div></strong>
+                  <li class="navbar__link">
+                        <p href="#" id="Fleche2">
+                              <strong id="text_color">Base 3<div class="fleche2 fleches" id="text_color"></div></strong>
                               <div class="etat2">
-                                    <p class="on_off2">OFF</p>
-                                    <p>Volume: <span class="value2">50</span>%</p>
+                                    <p class="on_off2" id="text_color">OFF</p>
+                                    <p id="text_color">Volume: <span class="value3">0</span>%</p>
                                     <div class="slider">
-                                          <input type="range" min="0" max="100" value="50" id="slider2" oninput="sliderJs('slider2', '.value2', 2)">
+                                          <input type="range" min="0" max="100" value="0" id="slider3" oninput="sliderJs('slider3', '.value3')">
                                     </div>
-                                    <p>Batterie: 63%</p>
-                                    <p>Fichier son</p>
                               </div>
-                        </a>
+                        </p>
                   </li>
-                  <li class="navbar__link third">
-                        <a href="#">
-                              <strong>Base 3<div class="fleche3 fleches"></div></strong>
+                  <li class="navbar__link">
+                        <p href="#" id="Fleche3">
+                              <strong id="text_color">Base 4<div class="fleche3 fleches" id="text_color"></div></strong>
                               <div class="etat3">
-                                    <p class="on_off3">OFF</p>
-                                    <p>Volume: <span class="value3">50</span>%</p>
+                                    <p class="on_off3" id="text_color">OFF</p>
+                                    <p id="text_color">Volume: <span class="value4">0</span>%</p>
                                     <div class="slider">
-                                          <input type="range" min="0" max="100" value="50" id="slider3" oninput="sliderJs('slider3', '.value3', 3)">
+                                          <input type="range" min="0" max="100" value="0" id="slider4" oninput="sliderJs('slider4', '.value4')">
                                     </div>
-                                    <p>Batterie: 63%</p>
-                                    <p>Fichier son</p>
                               </div>
-                        </a>
-                  </li>
-                  <li class="navbar__link four">
-                        <a href="#">
-                              <strong>Base 4<div class="fleche4 fleches"></div></strong>
-                              <div class="etat4">
-                                    <p class="on_off4">OFF</p>
-                                    <p>Volume: <span class="value4">50</span>%</p>
-                                    <div class="slider">
-                                          <input type="range" min="0" max="100" value="50" id="slider4" oninput="sliderJs('slider4', '.value4', 4)">
-                                    </div>
-                                    <p>Batterie: 63%</p>
-                                    <p>Fichier son</p>
-                              </div>
-                        </a>
+                        </p>
                   </li>
             </ul>   
             <button class="burger">
@@ -135,22 +127,22 @@
       <div class="terrain">
             <div class="carre"></div>
             <div class="base_1 base_div">
-                  <input class="base" type="button" value="1" id="button1" onclick="changeColor1()">
+                  <input class="base" type="button" value="1" id="button0">
             </div> 
             <div class="base_2 base_div">
-                  <input class="base" type="button" value="2" id="button2" onclick="changeColor2()">
+                  <input class="base" type="button" value="2" id="button1">
             </div> 
             <div class="base_3 base_div">
-                  <input class="base" type="button" value="3" id="button3" onclick="changeColor3()">
+                  <input class="base" type="button" value="3" id="button2">
             </div> 
             <div class="base_4 base_div">
-                  <input class="base" type="button" value="4" id="button4" onclick="changeColor4()">
+                  <input class="base" type="button" value="4" id="button3">
             </div> 
             <div class="chemainX"></div>
             <div class="chemainY"></div>
-            <div class="button_play">
+            <!-- <div class="button_play">
                   <input class="play" type="button" value="Start game" id="bplay" onclick="playGame()">
-            </div>
+            </div> -->
       </div>
       <script src="BlindBase.js"></script>
 </body>
