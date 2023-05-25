@@ -324,7 +324,7 @@ li:first-child {
     transform: rotate(-90deg);
 }
 /* mode sombre/claire */
-.switch {
+.switch {   
     position: absolute;
     display: inline-block;
     width: 50px;

@@ -74,7 +74,7 @@ for (let i = 0; i < 4; i++) {
     e.onclick = baseClick;
 }
 
-function baseClick(event) {
+async function baseClick(event) {
     const element = event.srcElement;
     let otherBases = [];
     let etatBases = [];
@@ -85,9 +85,15 @@ function baseClick(event) {
         if (e != element) otherBases.push(e);
     }
     if (element.status == BASE_ETEINTE) {
-        fetch(`/api/play/${element.value - 1}`, { method: "POST" });
-        element.style.backgroundColor = "green";
-        element.status = BASE_ALLUME;
+        let r = await fetch(`/api/play/${element.value - 1}`, { method: "POST" });
+        if (r.status == 200) {
+            element.style.backgroundColor = "green";
+            element.status = BASE_ALLUME;
+        }
+        else {
+            element.style.backgroundColor = "red";
+            setTimeout(() => { element.style.backgroundColor = "white"; }, 1000);
+        }
     } else if (element.status == BASE_ALLUME) {
         fetch(`/api/stop/${element.value - 1}`, { method: "POST" });
         element.style.backgroundColor = "white";
