@@ -8,27 +8,6 @@ function Score(id, T) {
     total.innerHTML = (parseInt(new_total) + 1).toString();
 }
 
-function checkBox() {
-    // changer les themes de la page
-    if (document.getElementById("checkbox").checked) {
-        document.body.style.backgroundColor = "rgba(35, 35, 45, 0.9)";
-        document.querySelector(".navbar").style.backgroundColor =
-            "rgb(30, 30, 30)";
-        document.querySelector(".navbar__links").style.backgroundColor =
-            "rgba(35, 35, 35, 0.7)";
-        document.getElementById("text_color").style.color = "white";
-        document.querySelector(".score").style.backgroundColor =
-            "rgb(175, 175, 175)";
-    } else {
-        document.body.style.backgroundColor = "white";
-        document.querySelector(".navbar").style.backgroundColor = "white";
-        document.querySelector(".navbar__links").style.backgroundColor =
-            "rgba(112, 112, 112, 0.7)";
-        document.getElementById("text_color").style.color = "black";
-        document.querySelector(".score").style.backgroundColor = "white";
-    }
-}
-
 function sliderJs(id, num_value) {
     // change valeur du volume des bases
     let slider = document.getElementById(id);
