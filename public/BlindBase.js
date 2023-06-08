@@ -1,6 +1,6 @@
 async function indicateurColor() {
     for (let i = 0; i < 4; i++) {
-        let borderBase = document.getElementById(`base_${i}`);
+        let borderBase = document.getElementById(`boutton${i}`);
         let r = await fetch(`/api/ping/${i}`);
         let rjson = await r.json();
         if (rjson.up == false) {
