@@ -1,6 +1,5 @@
 async function indicateurColor() {
     for (let i = 0; i < 4; i++) {
-        console.log(i);
         let borderBase = document.getElementById(`base_${i}`);
         let r = await fetch(`/api/ping/${i}`);
         let rjson = await r.json();
@@ -11,6 +10,7 @@ async function indicateurColor() {
         }
     }
 }
+indicateurColor();
 setInterval(() => {indicateurColor();}, 3000);
 
 // function checked() {
