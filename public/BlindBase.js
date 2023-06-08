@@ -10,7 +10,7 @@ async function indicateurColor() {
         }
     }
 }
-// setInterval(() => {indicateurColor();}, 3000);
+setInterval(() => {indicateurColor();}, 3000);
 
 // function checked() {
 //     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
