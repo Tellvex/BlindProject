@@ -1,12 +1,25 @@
-function Score(id, T) {
-    // inscrit le score dans la case demandé
-    let element = document.getElementById(id);
-    let total = document.getElementById(T);
-    let content = element.innerHTML;
-    element.innerHTML = (parseInt(content) + 1).toString();
-    new_total = total.innerHTML;
-    total.innerHTML = (parseInt(new_total) + 1).toString();
+async function indicateurColor() {
+    for (let i = 0; i < 4; i++) {
+        let borderBase = document.getElementsByClassName(`base_${i}`);
+        let r = await fetch(`/api/play/${i}`, { method: "POST" });
+        let rjson = await r.json();
+        if (rjson.up == false) {
+            borderBase.style.borderColor = 'red';
+        } else if (rjson.up == true) {
+            borderBase.style.borderColor = 'green';
+        }
+    }
 }
+// setInterval(() => {indicateurColor();}, 3000);
+
+// function checked() {
+//     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+//         document.getElementById("checkbox").checked = true;
+//     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+//         document.getElementById("checkbox").checked = false;
+//     }
+// }
+// checked();
 
 function sliderJs(id, num_value) {
     // change valeur du volume des bases
@@ -70,8 +83,9 @@ async function baseClick(event) {
             element.status = BASE_ALLUME;
         }
         else {
-            element.style.backgroundColor = "red";
-            setTimeout(() => { element.style.backgroundColor = "white"; }, 1000);
+            element.style.backgroundColor = "rgb(200, 200, 200)";
+            
+            setTimeout(() => { element.style.backgroundColor = "white"; }, 250);
         }
     } else if (element.status == BASE_ALLUME) {
         fetch(`/api/stop/${element.value - 1}`, { method: "POST" });
