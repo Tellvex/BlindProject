@@ -1,6 +1,6 @@
 async function indicateurColor() {
-    for (let i = 0; i < 4; i++) {
-        let borderBase = document.getElementsByClassName(`base_${i}`);
+    for (let i = 0; i < 3; i++) {
+        let borderBase = document.getElementById(`base_${i}`);
         let r = await fetch(`/api/ping/${i}`);
         let rjson = await r.json();
         if (rjson.up == false) {
@@ -84,11 +84,10 @@ async function baseClick(event) {
         }
         else {
             element.style.backgroundColor = "rgb(200, 200, 200)";
-            
             setTimeout(() => { element.style.backgroundColor = "white"; }, 250);
         }
     } else if (element.status == BASE_ALLUME) {
-        fetch(`/api/stop/${element.value - 1}`, { method: "POST" });
+        await fetch(`/api/stop/${element.value - 1}`, { method: "POST" });
         element.style.backgroundColor = "white";
         element.status = BASE_ETEINTE;
     }
