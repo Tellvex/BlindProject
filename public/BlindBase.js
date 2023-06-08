@@ -1,7 +1,7 @@
 async function indicateurColor() {
     for (let i = 0; i < 4; i++) {
         let borderBase = document.getElementsByClassName(`base_${i}`);
-        let r = await fetch(`/api/play/${i}`, { method: "POST" });
+        let r = await fetch(`/api/ping/${i}`, { method: "POST" });
         let rjson = await r.json();
         if (rjson.up == false) {
             borderBase.style.borderColor = 'red';
