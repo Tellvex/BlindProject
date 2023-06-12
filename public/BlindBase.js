@@ -14,9 +14,9 @@ indicateurColor();
 setInterval(() => {indicateurColor();}, 10000);
 
 function checked() {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
         document.documentElement.classList.add('dark-mode');
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.classList.add('light-mode');
     }
 }   
@@ -42,7 +42,7 @@ function sliderJs(id, num_value) {
 Array.prototype.forEach.call(document.getElementsByClassName("slider"), (e) => {
     let slider = e.children[0];
     slider.addEventListener("change", (e) => {
-        let id = parseInt(e.target.id.at(-1)) - 1;
+        let id = parseInt(e.target.id.at(-1));
         fetch(`/api/volume/${id}`, {
             method: "POST",
             body: JSON.stringify({ volume: parseInt(e.target.value) }),
