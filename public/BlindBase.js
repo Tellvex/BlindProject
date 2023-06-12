@@ -1,17 +1,27 @@
+const BASE_ETEINTE = 0;
+const BASE_ALLUME = 2;
+
 async function indicateurColor() {
     for (let i = 0; i < 4; i++) {
         let borderBase = document.getElementById(`buttonBase${i}`);
         let r = await fetch(`/api/ping/${i}`);
         let rjson = await r.json();
-        if (rjson.up == false) {
-            borderBase.style.borderColor = 'red';
-        } else if (rjson.up == true) {
+        if (rjson.up) {
             borderBase.style.borderColor = 'green';
+        } else {
+            borderBase.style.borderColor = 'red';
+        }
+        if (rjson.playing) {
+            document.getElementById(`buttonBAse${i}`).style.backgroundColor = "green";
+            document.getElementById(`buttonBAse${i}`).status = BASE_ALLUME;
+        } else {
+            document.getElementById(`buttonBAse${i}`).style.backgroundColor = "red";
+            document.getElementById(`buttonBAse${i}`).status = BASE_ETEINTE;
         }
     }
 }
 indicateurColor();
-setInterval(() => {indicateurColor();}, 10000);
+setInterval(() => { indicateurColor(); }, 10000);
 
 function checked() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -19,7 +29,7 @@ function checked() {
     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
         document.documentElement.classList.add('light-mode');
     }
-}   
+}
 checked();
 
 function sliderJs(id, num_value) {
@@ -58,9 +68,6 @@ function updateSliders() {
 }
 updateSliders();
 
-const BASE_ETEINTE = 0;
-const BASE_ALLUME = 2;
-
 for (let i = 0; i < 4; i++) {
     const e = document.getElementById(`buttonBase${i}`);
     e.status = BASE_ETEINTE;
@@ -79,7 +86,7 @@ async function baseClick(event) {
     }
     if (element.status == BASE_ETEINTE) {
         let r = await fetch(`/api/play/${element.value - 1}`, { method: "POST" });
-        if (r.status == 200) {
+        if (r.status == 200 || (r.status == 400 && r.statusText.includes("already playing"))) {
             element.style.backgroundColor = "green";
             element.status = BASE_ALLUME;
             if (etatBases[element.value - 1].innerHTML == "OFF") {
@@ -169,3 +176,14 @@ function toggleMenu() {
     }
 }
 toggleMenu();
+
+document.getElementById("file_input0").addEventListener('change', file_upload);
+
+function file_upload(e) {
+    console.log(e);
+    let base_id = e.target.id.at(-1);
+    let file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("file", file);
+    fetch(`/api/upload/${base_id}`, { method: "POST", body: formData });
+}

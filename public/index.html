@@ -31,6 +31,9 @@
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider0" oninput="sliderJs('slider0', '.value0')" >
                                     </div>
+                                    <div>
+                                          <input type="file" accept="audio/*" name="file_input" id="file_input0" class="audio_file">
+                                    </div>
                               </div>
                         </p>
                   </li>
@@ -42,6 +45,9 @@
                                     <p>Volume: <span class="value1">0</span>%</p>
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider1" oninput="sliderJs('slider1', '.value1')">
+                                    </div>
+                                    <div>
+                                          <input type="file" accept="audio/*" name="file_input" id="file_input1" class="audio_file">
                                     </div>
                               </div>
                         </p>
@@ -55,6 +61,9 @@
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider2" oninput="sliderJs('slider2', '.value2')">
                                     </div>
+                                    <div>
+                                          <input type="file" accept="audio/*" name="file_input" id="file_input2" class="audio_file">
+                                    </div>
                               </div>
                         </p>
                   </li>
@@ -67,6 +76,9 @@
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider3" oninput="sliderJs('slider3', '.value3')">
                                     </div>
+                                    <div>
+                                          <input type="file" accept="audio/*" name="file_input" id="file_input3" class="audio_file">
+                                    </div>
                               </div>
                         </p>
                   </li>
@@ -74,25 +86,27 @@
       </nav>
       <!-- terrain de baseball avec les 4 bases cliquable pour activation -->
       <div class="ground      ">
-            <div class="carre">
-                  <div class="terre1"></div>
-                  <div class="terre2"></div>
-                  <div class="terre3"></div>
+            <div class="position">
+                  <div class="carre">
+                        <div class="terre1"></div>
+                        <div class="terre2"></div>
+                        <div class="terre3"></div>
+                  </div>
+                  <div class="base_0 base_div">
+                        <input class="base" type="button" value="1" id="buttonBase0">
+                  </div> 
+                  <div class="base_1 base_div">
+                        <input class="base" type="button" value="2" id="buttonBase1">
+                  </div> 
+                  <div class="base_2 base_div">
+                        <input class="base" type="button" value="3" id="buttonBase2">
+                  </div> 
+                  <div class="base_3 base_div">
+                        <input class="base" type="button" value="4" id="buttonBase3">
+                  </div> 
+                  <div class="chemainX"></div>
+                  <div class="chemainY"></div>
             </div>
-            <div class="base_0 base_div">
-                  <input class="base" type="button" value="1" id="buttonBase0">
-            </div> 
-            <div class="base_1 base_div">
-                  <input class="base" type="button" value="2" id="buttonBase1">
-            </div> 
-            <div class="base_2 base_div">
-                  <input class="base" type="button" value="3" id="buttonBase2">
-            </div> 
-            <div class="base_3 base_div">
-                  <input class="base" type="button" value="4" id="buttonBase3">
-            </div> 
-            <div class="chemainX"></div>
-            <div class="chemainY"></div>
       </div>
       <script src="BlindBase.js"></script>
 </body>

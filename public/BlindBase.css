@@ -87,6 +87,11 @@ body {
     border-top-right-radius: 55%;
     border-bottom-left-radius: 25px;
 }
+.position {
+    height: 300px;
+    width: 300px;
+    transform: translate(0px, 0px);
+}
 /* centre terrain */
 .carre {
     height: 150px;
@@ -442,4 +447,9 @@ input:checked + .slider2:before {
     padding-bottom: 10px;
     max-height: 100px;
     border-radius: 18px;
+}
+.audio_file{    
+    border-radius: 25px;
+    height: 20px;
+    width: 100px;
 }
