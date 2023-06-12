@@ -11,7 +11,8 @@
 
     ```json
     {
-      "up": bool
+      "up": bool,
+      "playing": bool
     }
     ```
 

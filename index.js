@@ -1,34 +1,58 @@
 const PORT = 8080;
-const BASES = ["192.168.34.2"];
+const BASES = [
+    {
+        ip: "blind1.local",
+        soundcard: 1,
+        control: "Speaker",
+    },
+    {
+        ip: "blind2.local",
+        soundcard: 1,
+        control: "Headphone",
+    },
+    {
+        ip: "blind3.local",
+        soundcard: 1,
+        control: "Speaker",
+    },
+    {
+        ip: "blind4.local",
+        soundcard: 1,
+        control: "Speaker",
+    },
+];
 const DEFAULT_FILE = "/usr/share/sounds/alsa/Front_Center.wav";
 
 const { NodeSSH } = require("node-ssh");
-const ssh = new NodeSSH();
 const express = require("express");
 const app = express();
 
-// array of { id: number, connection: ssh_connection, is_playing: bool, volume: number, file: string }
+// array of { id: number, connection: ssh_connection, is_playing: bool, volume: number, file: string, soundcard: number, control: string }
 let bases = [];
 
 async function start() {
     for (let i = 0; i < BASES.length; i++) {
-        let ip = BASES[i];
+        let ip = BASES[i].ip;
         console.log(`Connecting to ${ip}...`);
         try {
-            let connection = await ssh.connect({
+            let connection = await new NodeSSH().connect({
                 host: ip,
                 username: "pi",
                 privateKeyPath: `${process.env.HOME}/.ssh/id_rsa`,
             });
-            let volume = await get_base_volume(connection);
-            console.log("Connected");
-            bases.push({
+            let base = {
                 id: i,
                 connection,
                 is_playing: false,
-                volume,
+                volume: 0,
                 file: DEFAULT_FILE,
-            });
+                soundcard: BASES[i].soundcard,
+                control: BASES[i].control,
+            };
+            let volume = await get_base_volume(base);
+            base.volume = volume;
+            bases.push(base);
+            console.log("Connected");
         } catch (e) {
             console.error(`Failed to connect to ${ip}: ${e}`);
         }
@@ -42,7 +66,7 @@ async function start() {
 
     setInterval(() => {
         bases.forEach(async (base) => {
-            let volume = await get_base_volume(base.connection);
+            let volume = await get_base_volume(base);
             base.volume = volume;
         });
     }, 5000);
@@ -77,7 +101,9 @@ app.get("/api/ping/:n", (req, res) => {
         res.end(`Invalid number ${req.params.n}`);
         return;
     }
-    res.json({ up: get_base(n) != undefined });
+    let base = get_base(n);
+    let playing = base && base.is_playing;
+    res.json({ up: base != undefined, playing });
     res.end();
 });
 
@@ -93,7 +119,7 @@ app.post("/api/play/:n", base_by_id_middleware, (req, res) => {
         res.end(`The base ${id} is already playing sound`);
         return;
     }
-    const connection = base.connection;
+    let connection = base.connection;
     console.log(`Playing sound on base ${id}`);
     base.is_playing = true;
     connection.exec("bash", ["/home/pi/startSND.sh"]).catch(console.error);
@@ -108,7 +134,7 @@ app.post("/api/stop/:n", base_by_id_middleware, (req, res) => {
         res.end(`The base ${id} is not playing sound`);
         return;
     }
-    const connection = base.connection;
+    let connection = base.connection;
     console.log(`Stopping sound on base ${id}`);
     base.is_playing = false;
     connection.exec("bash", ["/home/pi/stopSND.sh"]).catch(console.error);
@@ -129,21 +155,24 @@ app.post(
         }
         console.log(`The volume of the base ${id} is now ${volume}%`);
         base.volume = volume;
-        set_base_volume(base.connection, volume);
+        set_base_volume(base, volume);
         res.end();
     }
 );
 
 app.use(express.static("public", { extensions: ["html"] }));
 
-function set_base_volume(connection, volume) {
-    connection.exec("bash", ["-c", `amixer -c 1 sset Speaker ${volume}%`]);
+function set_base_volume(base, volume) {
+    base.connection.exec("bash", [
+        "-c",
+        `amixer -c ${base.soundcard} sset ${base.control} ${volume}%`,
+    ]);
 }
 
-async function get_base_volume(connection) {
-    let r = await connection.exec("bash", [
+async function get_base_volume(base) {
+    let r = await base.connection.exec("bash", [
         "-c",
-        `amixer -c 1 sget Speaker | awk -F 'Left:|[][]' 'BEGIN {RS=""}{ print $3 }' | sed 's/.$//'`,
+        `amixer -c ${base.soundcard} sget ${base.control} | awk -F 'Left:|[][]' 'BEGIN {RS=""}{ print $3 }' | sed 's/.$//'`,
     ]);
     return parseInt(r);
 }
