@@ -12,11 +12,11 @@ async function indicateurColor() {
             borderBase.style.borderColor = 'red';
         }
         if (rjson.playing) {
-            document.getElementById(`buttonBAse${i}`).style.backgroundColor = "green";
-            document.getElementById(`buttonBAse${i}`).status = BASE_ALLUME;
+            document.getElementById(`buttonBase${i}`).style.backgroundColor = "green";
+            document.getElementById(`buttonBase${i}`).status = BASE_ALLUME;
         } else {
-            document.getElementById(`buttonBAse${i}`).style.backgroundColor = "red";
-            document.getElementById(`buttonBAse${i}`).status = BASE_ETEINTE;
+            document.getElementById(`buttonBase${i}`).style.backgroundColor = "red";
+            document.getElementById(`buttonBase${i}`).status = BASE_ETEINTE;
         }
     }
 }
@@ -178,6 +178,9 @@ function toggleMenu() {
 toggleMenu();
 
 document.getElementById("file_input0").addEventListener('change', file_upload);
+document.getElementById("file_input1").addEventListener('change', file_upload);
+document.getElementById("file_input2").addEventListener('change', file_upload);
+document.getElementById("file_input3").addEventListener('change', file_upload);
 
 function file_upload(e) {
     console.log(e);
