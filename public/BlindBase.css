@@ -1,64 +1,32 @@
-/* devanagari */
 @font-face {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 200;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLFj_Z11lFc-K.woff2)
-        format("woff2");
-    unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8,
-        U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+    font-family: 'maPolice';
+    src: url('/public/Poppins-ExtraLight.ttf') format('woff2');
 }
-/* latin-ext */
-@font-face {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 200;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLFj_Z1JlFc-K.woff2)
-        format("woff2");
-    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-        U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+.light-mode {
+    --bg-color: rgb(255, 255, 255);
+    --nav-color: rgb(255, 255, 255);
+    --font-color: rgb(0, 0, 0);
+    --specialFeaturs: rgb(255, 255, 255);
+    --navlinks-color: rgba(112, 112, 112, 0.7);
 }
-/* latin */
-@font-face {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 200;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2)
-        format("woff2");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-        U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
-        U+2215, U+FEFF, U+FFFD;
-}
-@media (prefers-color-scheme: light) {
-    :root {
-        --bg-color: rgb(255, 255, 255);
-        --nav-color: rgb(255, 255, 255);
-        --font-color: rgb(0, 0, 0);
-        --navlinks-color: rgba(112, 112, 112, 0.7);
-    }
-}
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color:rgb(55, 55, 65);
-        --nav-color:rgb(35, 35, 35);
-        --font-color:white;
-        --navlinks-color:rgba(20, 20, 25, 0.65);
-    }
+.dark-mode {
+    --bg-color: rgb(55, 55, 65);
+    --nav-color: rgb(35, 35, 35);
+    --font-color: rgb(205, 205, 205);
+    --specialFeaturs: rgb(205, 205, 205);
+    --navlinks-color: rgba(20, 20, 25, 0.65);
 }
 .navbar,
 .navbar__link > p {
     color: var(--font-color);
 }
-.bar,
-.bar::before,
-.bar::after {
+.bar_menu,
+.bar_menu::before,
+.bar_menu::after {
     background: var(--font-color);
 }
-.fleches,
-.fleches::before {
+.arrows,
+.arrows::before {
     background-color: var(--font-color);
 }
 .etat0,
@@ -67,17 +35,18 @@
 .etat3 {
     border: solid 0px var(--font-color);
 }
-.show-fleche0 .etat0,
-.show-fleche1 .etat1,
-.show-fleche2 .etat2,
-.show-fleche3 .etat3 {
+.show_arrow0 .etat0,
+.show_arrow1 .etat1,
+.show_arrow2 .etat2,
+.show_arrow3 .etat3 {
     border: solid 1px var(--font-color);
 }
 body {
     background-color: var(--bg-color);
     margin: 0;
     font-size: var(--font-size);
-    font-family: "Poppins", sans-serif;
+    font-family: "maPolice", sans-serif;
+    cursor: default;
 }
 * {
     box-sizing: border-box;
@@ -87,26 +56,34 @@ body {
 }
 /* terrain de baseball avec bases */
 /* terrain de baseball / carré vert */
-.terrain {
+:root {
+    --textureColor: #5d0303;
+    /* d46363 5d0303 000000 923a3a */
+}
+.ground {
     z-index: 1;
-    background-color: green;
+    background-color: rgb(0, 128, 0);
     height: 350px;
     width: 350px;
     position: relative;
+    /* margin-top: 50px; */
     top: 50%;
     left: 50%;
     border-radius: 25px;
-    transform: translate(-50%, 20%);
+    transform: translate(-50%, 35%);
     box-shadow: 0 0 20px 5px black;
-}
+} 
 /* terrain de baseball partie terre */
-.terrain:before {
+.ground:before {
     content: "";
     position: absolute;
-    background-color: brown;
+    background-image: repeating-linear-gradient(-45deg, var(--textureColor) 0, var(--textureColor) 2px, transparent 0, transparent 50%);
+    background-size: 25px 25px; 
+    background-color: #923a3a;
+    background-position: 26px 26px;
     height: 300px;
     width: 300px;
-    transform: translate(0%, 50px);
+    transform: translate(0px, 51px);
     border-top-right-radius: 55%;
     border-bottom-left-radius: 25px;
 }
@@ -115,7 +92,7 @@ body {
     height: 150px;
     width: 150px;
     transform: translate(45%, 90%);
-    background-color: green;
+    background-color: rgb(0, 128, 0);
 }
 /* centre terrain bord creusé */
 .carre:before {
@@ -123,25 +100,50 @@ body {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-color: brown;
-    box-shadow: 140px 0 0 0 brown, 0px 140px 0 0 brown, 140px 140px 0 0 brown;
+    background-image: repeating-linear-gradient(-45deg, var(--textureColor) 0, var(--textureColor) 2px, transparent 0, transparent 50%);
+    background-size: 25px 25px; 
+    background-color: #923a3a;
+    background-position: 32.75px 32.75px;
     border-radius: 20px;
     transform: translate(-40%, -40%);
 }
+.terre1, .terre2, .terre3 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: repeating-linear-gradient(-45deg, var(--textureColor) 0, var(--textureColor) 2px, transparent 0, transparent 50%);
+    background-size: 25px 25px; 
+    background-color: #923a3a;
+    border-radius: 20px;
+}
+.terre1 {
+    transform: translate(-20px, 120px);
+    background-position: 38px 38px;
+}
+.terre2 {
+    transform: translate(120px, 120px);
+    background-position: 30.25px 30.25px;
+}
+.terre3 {
+    transform: translate(120px, -20px);
+    background-position: 38px 38px;
+}
 /* chemain entre les bases */
 .chemainX {
-    background-color: white;
+    background-color: var(--specialFeaturs);
     height: 3px;
     width: 90px;
+    border-radius: 25px;
     transform: translate(108%, -57.5px);
-    box-shadow: 0px -168px 0 0 white;
+    box-shadow: 0px -168px 0 0 var(--specialFeaturs);
 }
 .chemainY {
-    background-color: white;
+    background-color: var(--specialFeaturs);
     height: 90px;
     width: 3px;
+    border-radius: 25px;
     transform: translate(58px, -187.5px);
-    box-shadow: 167px 0px 0 0 white;
+    box-shadow: 167px 0px 0 0 var(--specialFeaturs);
 }
 /* taille des bases */
 .base_div {
@@ -155,35 +157,29 @@ body {
     border-color: red; /* rgb(35, 210, 35) */
     border-style: solid;
     border-radius: 15px;
-    outline: solid black 1.75px;
+    /* outline: solid black 1.5px;  */
     width: 50px;
     height: 50px;
+    transition-duration: 0.5s;
+    background-color: var(--specialFeaturs);
+}
+.base:active {
+    transition-timing-function: ease;
+    background-color: gray;
+    transform: scale(1.15);
 }
 /* position bases */
-.base_1 {
+.base_0 {
     transform: translate(80%, 225%);
 }
-.base_2 {
+.base_1 {
     transform: translate(390%, 125%);
 }
-.base_3 {
+.base_2 {
     transform: translate(390%, -285%);
 }
-.base_4 {
+.base_3 {
     transform: translate(80%, -385%);
-}
-/* boutton play */
-.button_play {
-    height: 40px;
-    width: 120px;
-    transform: translate(100%, -130%);
-}
-.play {
-    height: 40px;
-    width: 120px;
-    border-radius: 50px;
-    border: none;
-    box-shadow: 0 0 20px 2px black;
 }
 /* menu bases */
 /* menu burger */
@@ -195,9 +191,10 @@ body {
     padding: 10px;
     font-size: 1.1rem;
     background: var(--nav-color);
+    box-shadow: 0 0 20px 5px black;
 }
 /* bouton menu burger */
-.burger {
+.menu_burger {
     display: block;
     position: relative;
     padding: 0;
@@ -208,15 +205,15 @@ body {
     cursor: pointer;
 }
 /* bar du bouton burger */
-.bar {
+.bar_menu {
     display: block;
     width: 45px;
     height: 4px;
     border-radius: 3px;
     transition: all 0.25s ease-in-out;
 }
-.bar::before,
-.bar::after {
+.bar_menu::before,
+.bar_menu::after {
     content: "";
     width: 45px;
     height: 4px;
@@ -226,10 +223,10 @@ body {
     transition: all 0.25s ease-in-out;
 }
 /* position des bar */
-.bar::before {
+.bar_menu::before {
     transform: translateY(-12px);
 }
-.bar::after {
+.bar_menu::after {
     transform: translateY(12px);
 }
 /* liste du menu */
@@ -252,6 +249,7 @@ body {
     padding: 15px 15px;
     transform: translateX(100%);
     transition: all 0.5s ease-in-out;
+    cursor: pointer;
 }
 .navbar__link > p {
     text-decoration: none;
@@ -263,12 +261,7 @@ body {
 /* position logo */
 .logo {
     display: flex;
-    position: relative;
-    transform: translateX(calc(100% - 35px));
-}
-/* position ouverture menu */
-.burger {
-    transform: translateX(-250%);
+    margin-left: 15px;
 }
 /* aspect et position de la liste dans le menu */
 ul {
@@ -281,8 +274,9 @@ li:first-child {
     margin-top: -10px;
 }
 /* indice ouverture/fermeture description des bases */
-.fleches {
+.arrows {
     position: relative;
+    border-radius: 2px;
     left: 100px;
     top: -25px;
     height: 3px;
@@ -290,9 +284,10 @@ li:first-child {
     transform: rotate(45deg);
     transition: all 0.5s ease-in-out;
 }
-.fleches::before {
+.arrows::before {
     content: "";
     position: absolute;
+    border-radius: 2px;
     top: 6px;
     left: 6px;
     height: 3px;
@@ -300,7 +295,7 @@ li:first-child {
     transform: rotate(-90deg);
 }
 /* mode sombre/claire */
-/* .switch {
+.switch {
 	display: inline-block;
 	position: relative;
 	width: 60px;
@@ -314,8 +309,8 @@ li:first-child {
 	position: absolute;
 	top: -30px;
 	left: -30px;
-	width: 0;
-	height: 0;
+	width: 0px;
+	height: 0px;
 }
 .switch input + span {
     position: absolute;
@@ -325,8 +320,8 @@ li:first-child {
     right: 0;
     background: #99b4df;
     border-radius: 20px;
-} */
-/* .switch input:checked + span {
+}
+.switch input:checked + span {
 	background: #346abf;
 }
 .switch input:checked + span:before {
@@ -355,20 +350,20 @@ input:checked + .slider2:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-} */
-/* .slider2.round {
+}
+.slider2.round {
     border-radius: 34px;
 }
 .slider2.round:before {
     border-radius: 50%;
-} */
+}
 /* description des etats des bases */
 .etat0,
 .etat1,
 .etat2,
 .etat3 {
     font-size: 15px;
-    width: 125px;
+    width: 130px;
     max-height: 0;
     border-radius: 0;
     overflow: hidden;
@@ -379,75 +374,71 @@ input:checked + .slider2:before {
 .etat1 > p:first-child,
 .etat2 > p:first-child,
 .etat3 > p:first-child {
-    margin-top: 2px;
-}
-.etat0 *,
-.etat1 *,
-.etat2 *,
-.etat3 * {
-    margin-top: -3px;
+    margin-top: 8px;
 }
 .etat0 > p,
 .etat1 > p,
 .etat2 > p,
 .etat3 > p {
-    margin-left: 15px;
+    margin-left: 14px;
 }
 /* modification valeur volume */
 .slider {
-    width: 80px;
-    height: 14px;
-    margin-left: 20px;
+    margin-top: 2px;
+    width: 100px;
+    height: 18px;
+    margin-left: 14px;
 }
+#slider0,
 #slider1,
 #slider2,
-#slider3,
-#slider4 {
-    width: 80px;
+#slider3 {
+    vertical-align: middle;
+    width: 100px;
     height: 14px;
     transform: translateY(-3px);
 }
 /* animation */
 /* apparition menu */
-.show-nav .navbar__links {
+.show_nav .navbar__links {
     width: 100%;
     border-top-right-radius: 0;
     transform: translateX(0);
 }
 /* animation bouton burger */
-.show-nav .navbar__link {
+.show_nav .navbar__link {
     transform: translateX(0);
 }
-.show-nav .bar {
+.show_nav .bar_menu {
     background: transparent;
 }
-.show-nav .bar::before {
+.show_nav .bar_menu::before {
     transform: rotate(45deg);
 }
-.show-nav .bar::after {
+.show_nav .bar_menu::after {
     transform: rotate(-45deg);
 }
 /* animation fleches */
-.show-fleche_all .fleche_all {
+.show_all_arrows .all_arrows {
     transform: rotate(135deg) translateY(-5px);
 }
-.show-fleche0 .fleche0 {
+.show_arrow0 .arrow0 {
     transform: rotate(135deg) translateY(-5px);
 }
-.show-fleche1 .fleche1 {
+.show_arrow1 .arrow1 {
     transform: rotate(135deg) translateY(-5px);
 }
-.show-fleche2 .fleche2 {
+.show_arrow2 .arrow2 {
     transform: rotate(135deg) translateY(-5px);
 }
-.show-fleche3 .fleche3 {
+.show_arrow3 .arrow3 {
     transform: rotate(135deg) translateY(-5px);
 }
 /* affichage description des bases */
-.show-fleche0 .etat0,
-.show-fleche1 .etat1,
-.show-fleche2 .etat2,
-.show-fleche3 .etat3 {
+.show_arrow0 .etat0,
+.show_arrow1 .etat1,
+.show_arrow2 .etat2,
+.show_arrow3 .etat3 {
     padding-bottom: 10px;
     max-height: 100px;
     border-radius: 18px;

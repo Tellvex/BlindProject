@@ -5,45 +5,62 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content=" initial-scale=1.0">
       <link rel="stylesheet" href="BlindBase.css" type="text/css">
-      <title>Blind Base</title>
+      <title>Blind Net Project</title>
 </head>
 <body>
       <!-- menu pour voire l'etat, le volume, la batterie et le fichier son des 4 bases -->
       <nav class="navbar" role="navigation"> 
-            <h1 class="logo" id="text_color">BlindBase</h1> 
-            <ul class="navbar__links" id="text_color">
-                  <li class="navbar__link">
-                        <!-- <p href="#">
-                              <strong class="theme" id="text_color">Theme sombre</strong> 
-                              <label class="switch" >
-                                    <input type="checkbox" id="checkbox"/>
+            <button class="menu_burger">
+                  <div class="bar_menu"></div>  
+            </button>   
+            <div class="logo">
+                  <h1 >BlindBase</h1> 
+            </div>
+            <ul class="navbar__links">
+                  <!-- <li class="navbar__link">
+                        <p>
+                              <strong class="theme">Theme sombre</strong> 
+                              <label class="switch">
+                                    <input type="checkbox" id="checkbox" onclick="btnChecked()"/>
                                     <span></span>
                               </label>
-                        </p> -->
-                  </li>
+                        </p>
+                  </li> -->
                   <li class="navbar__link">
-                        <p href="#" id="all">
-                              <strong id="text_color">All<div class="fleche_all fleches" id="text_color"></div></strong>
+                        <p id="all_descriptions">
+                              <strong>All<div class="all_arrows arrows"></div></strong>
                         </p>
                   </li>
                   <li class="navbar__link" >
-                        <p href="#" id="Fleche0">
-                              <strong id="text_color">Base 1<div class="fleche0 fleches" id="text_color"></div></strong>
+                        <p id="Arrow0">
+                              <strong>Base 1<div class="arrow0 arrows"></div></strong>
                               <div class="etat0">
-                                    <p class="on_off0" id="text_color">OFF</p>
-                                    <p id="text_color">Volume: <span class="value1">0</span>%</p>
+                                    <p class="on_off0">OFF</p>
+                                    <p>Volume: <span class="value0">0</span>%</p>
                                     <div class="slider">
-                                          <input type="range" min="0" max="100" value="0" id="slider1" oninput="sliderJs('slider1', '.value1')" >
+                                          <input type="range" min="0" max="100" value="0" id="slider0" oninput="sliderJs('slider0', '.value0')" >
                                     </div>
                               </div>
                         </p>
                   </li>
                   <li class="navbar__link">
-                        <p href="#" id="Fleche1">
-                              <strong id="text_color">Base 2<div class="fleche1 fleches" id="text_color"></div></strong>
+                        <p id="Arrow1">
+                              <strong>Base 2<div class="arrow1 arrows"></div></strong>
                               <div class="etat1">
-                                    <p class="on_off1" id="text_color">OFF</p>
-                                    <p id="text_color">Volume: <span class="value2">0</span>%</p>
+                                    <p class="on_off1">OFF</p>
+                                    <p>Volume: <span class="value1">0</span>%</p>
+                                    <div class="slider">
+                                          <input type="range" min="0" max="100" value="0" id="slider1" oninput="sliderJs('slider1', '.value1')">
+                                    </div>
+                              </div>
+                        </p>
+                  </li>
+                  <li class="navbar__link">
+                        <p id="Arrow2">
+                              <strong>Base 3<div class="arrow2 arrows"></div></strong>
+                              <div class="etat2">
+                                    <p class="on_off2">OFF</p>
+                                    <p>Volume: <span class="value2">0</span>%</p>
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider2" oninput="sliderJs('slider2', '.value2')">
                                     </div>
@@ -51,48 +68,37 @@
                         </p>
                   </li>
                   <li class="navbar__link">
-                        <p href="#" id="Fleche2">
-                              <strong id="text_color">Base 3<div class="fleche2 fleches" id="text_color"></div></strong>
-                              <div class="etat2">
-                                    <p class="on_off2" id="text_color">OFF</p>
-                                    <p id="text_color">Volume: <span class="value3">0</span>%</p>
+                        <p id="Arrow3">
+                              <strong>Base 4<div class="arrow3 arrows"></div></strong>
+                              <div class="etat3">
+                                    <p class="on_off3">OFF</p>
+                                    <p>Volume: <span class="value3">0</span>%</p>
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider3" oninput="sliderJs('slider3', '.value3')">
                                     </div>
                               </div>
                         </p>
                   </li>
-                  <li class="navbar__link">
-                        <p href="#" id="Fleche3">
-                              <strong id="text_color">Base 4<div class="fleche3 fleches" id="text_color"></div></strong>
-                              <div class="etat3">
-                                    <p class="on_off3" id="text_color">OFF</p>
-                                    <p id="text_color">Volume: <span class="value4">0</span>%</p>
-                                    <div class="slider">
-                                          <input type="range" min="0" max="100" value="0" id="slider4" oninput="sliderJs('slider4', '.value4')">
-                                    </div>
-                              </div>
-                        </p>
-                  </li>
             </ul>   
-            <button class="burger">
-                  <span class="bar"></span>  
-            </button>   
       </nav>
       <!-- terrain de baseball avec les 4 bases cliquable pour activation -->
-      <div class="terrain">
-            <div class="carre"></div>
+      <div class="ground      ">
+            <div class="carre">
+                  <div class="terre1"></div>
+                  <div class="terre2"></div>
+                  <div class="terre3"></div>
+            </div>
+            <div class="base_0 base_div">
+                  <input class="base" type="button" value="1" id="buttonBase0">
+            </div> 
             <div class="base_1 base_div">
-                  <input class="base" type="button" value="1" id="button0">
+                  <input class="base" type="button" value="2" id="buttonBase1">
             </div> 
             <div class="base_2 base_div">
-                  <input class="base" type="button" value="2" id="button1">
+                  <input class="base" type="button" value="3" id="buttonBase2">
             </div> 
             <div class="base_3 base_div">
-                  <input class="base" type="button" value="3" id="button2">
-            </div> 
-            <div class="base_4 base_div">
-                  <input class="base" type="button" value="4" id="button3">
+                  <input class="base" type="button" value="4" id="buttonBase3">
             </div> 
             <div class="chemainX"></div>
             <div class="chemainY"></div>

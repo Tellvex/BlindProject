@@ -1,6 +1,6 @@
 async function indicateurColor() {
     for (let i = 0; i < 4; i++) {
-        let borderBase = document.getElementById(`button${i}`);
+        let borderBase = document.getElementById(`buttonBase${i}`);
         let r = await fetch(`/api/ping/${i}`);
         let rjson = await r.json();
         if (rjson.up == false) {
@@ -11,16 +11,26 @@ async function indicateurColor() {
     }
 }
 indicateurColor();
-setInterval(() => {indicateurColor();}, 3000);
+setInterval(() => {indicateurColor();}, 10000);
 
-// function checked() {
-//     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-//         document.getElementById("checkbox").checked = true;
-//     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-//         document.getElementById("checkbox").checked = false;
+function checked() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark-mode');
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.documentElement.classList.add('light-mode');
+    }
+}   
+checked();
+
+// function btnChecked() {
+//     if (document.documentElement.classList.contains('dark-mode')) {
+//         document.documentElement.classList.remove('dark-mode');
+//         document.documentElement.classList.add('light-mode');
+//     } else {
+//         document.documentElement.classList.remove('light-mode');
+//         document.documentElement.classList.add('dark-mode');
 //     }
 // }
-// checked();
 
 function sliderJs(id, num_value) {
     // change valeur du volume des bases
@@ -43,8 +53,8 @@ Array.prototype.forEach.call(document.getElementsByClassName("slider"), (e) => {
 
 function updateSliders() {
     for (let i = 0; i < 4; i++) {
-        let sliderId = `slider${i + 1}`;
-        let valueSelector = `.value${i + 1}`;
+        let sliderId = `slider${i}`;
+        let valueSelector = `.value${i}`;
         let slider = document.getElementById(sliderId);
         let value = document.querySelector(valueSelector);
         fetch(`/api/volume/${i}`)
@@ -62,7 +72,7 @@ const BASE_ETEINTE = 0;
 const BASE_ALLUME = 2;
 
 for (let i = 0; i < 4; i++) {
-    const e = document.getElementById(`button${i}`);
+    const e = document.getElementById(`buttonBase${i}`);
     e.status = BASE_ETEINTE;
     e.onclick = baseClick;
 }
@@ -72,7 +82,7 @@ async function baseClick(event) {
     let otherBases = [];
     let etatBases = [];
     for (let i = 0; i < 4; i++) {
-        let e = document.getElementById(`button${i}`);
+        let e = document.getElementById(`buttonBase${i}`);
         var t = document.querySelector(`.on_off${i}`);
         etatBases.push(t);
         if (e != element) otherBases.push(e);
@@ -82,18 +92,17 @@ async function baseClick(event) {
         if (r.status == 200) {
             element.style.backgroundColor = "green";
             element.status = BASE_ALLUME;
-        }
-        else {
-            element.style.backgroundColor = "rgb(200, 200, 200)";
-            setTimeout(() => { element.style.backgroundColor = "white"; }, 250);
+            if (etatBases[element.value - 1].innerHTML == "OFF") {
+                etatBases[element.value - 1].innerHTML = "ON";
+            }
         }
     } else if (element.status == BASE_ALLUME) {
         await fetch(`/api/stop/${element.value - 1}`, { method: "POST" });
         element.style.backgroundColor = "white";
         element.status = BASE_ETEINTE;
-    }
-    if (etatBases[element.value - 1].innerHTML == "ON") {
-        etatBases[element.value - 1].innerHTML = "OFF";
+        if (etatBases[element.value - 1].innerHTML == "ON") {
+            etatBases[element.value - 1].innerHTML = "OFF";
+        }
     }
 }
 
@@ -111,60 +120,60 @@ async function reponseFetch() {
 
 function toggleMenu() {
     // pour afficher le menu avec les detailles des 4 bases
-    const FELCHE_OFF = 0;
-    const FELCHE_ON = 1;
-    let flA = FELCHE_OFF;
-    let otherFleches = [];
+    const ARROW_OFF = 0;
+    const ARROW_ON = 1;
+    let flA = ARROW_OFF;
+    let otherArrows = [];
     const navbar = document.querySelector(".navbar");
-    const burger = document.querySelector(".burger");
+    const burger = document.querySelector(".menu_burger");
     for (let i = 0; i < 4; i++) {
-        let f = document.getElementById(`Fleche${i}`);
-        f.status = FELCHE_OFF;
-        otherFleches.push(f);
+        let f = document.getElementById(`Arrow${i}`);
+        f.status = ARROW_OFF;
+        otherArrows.push(f);
     }
-    const flecheAll = document.getElementById("all");
+    const arrowAll = document.getElementById("all_descriptions");
     burger.addEventListener("click", () => {
-        navbar.classList.toggle("show-nav");
-        if (flA == FELCHE_ON) {
-            navbar.classList.toggle("show-fleche_all");
-            flA = FELCHE_OFF;
+        navbar.classList.toggle("show_nav");
+        if (flA == ARROW_ON) {
+            navbar.classList.toggle("show_all_arrows");
+            flA = ARROW_OFF;
         }
         for (let i = 0; i < 4; i++) {
-            if (otherFleches[i].status == FELCHE_ON) {
-                navbar.classList.toggle(`show-fleche${i}`);
-                otherFleches[i].status = FELCHE_OFF;
+            if (otherArrows[i].status == ARROW_ON) {
+                navbar.classList.toggle(`show_arrow${i}`);
+                otherArrows[i].status = ARROW_OFF;
             }
         }
     });
-    flecheAll.addEventListener("click", () => {
-        if (flA == FELCHE_OFF) {
-            navbar.classList.toggle("show-fleche_all");
-            flA = FELCHE_ON;
+    arrowAll.addEventListener("click", () => {
+        if (flA == ARROW_OFF) {
+            navbar.classList.toggle("show_all_arrows");
+            flA = ARROW_ON;
             for (let i = 0; i < 4; i++) {
-                if (otherFleches[i].status == FELCHE_OFF) {
-                    navbar.classList.toggle(`show-fleche${i}`);
-                    otherFleches[i].status = FELCHE_ON;
+                if (otherArrows[i].status == ARROW_OFF) {
+                    navbar.classList.toggle(`show_arrow${i}`);
+                    otherArrows[i].status = ARROW_ON;
                 }
             }
-        } else if (flA == FELCHE_ON) {
-            navbar.classList.toggle("show-fleche_all");
-            flA = FELCHE_OFF;
+        } else if (flA == ARROW_ON) {
+            navbar.classList.toggle("show_all_arrows");
+            flA = ARROW_OFF;
             for (let i = 0; i < 4; i++) {
-                if (otherFleches[i].status == FELCHE_ON) {
-                    navbar.classList.toggle(`show-fleche${i}`);
-                    otherFleches[i].status = FELCHE_OFF;
+                if (otherArrows[i].status == ARROW_ON) {
+                    navbar.classList.toggle(`show_arrow${i}`);
+                    otherArrows[i].status = ARROW_OFF;
                 }
             }
         }
     });
     for (let i = 0; i < 4; i++) {
-        otherFleches[i].addEventListener("click", () => {
-            if (otherFleches[i].status == FELCHE_OFF) {
-                navbar.classList.toggle(`show-fleche${i}`);
-                otherFleches[i].status = FELCHE_ON;
-            } else if (otherFleches[i].status == FELCHE_ON) {
-                navbar.classList.toggle(`show-fleche${i}`);
-                otherFleches[i].status = FELCHE_OFF;
+        otherArrows[i].addEventListener("click", () => {
+            if (otherArrows[i].status == ARROW_OFF) {
+                navbar.classList.toggle(`show_arrow${i}`);
+                otherArrows[i].status = ARROW_ON;
+            } else if (otherArrows[i].status == ARROW_ON) {
+                navbar.classList.toggle(`show_arrow${i}`);
+                otherArrows[i].status = ARROW_OFF;
             }
         });
     }
