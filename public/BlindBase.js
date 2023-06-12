@@ -14,23 +14,13 @@ indicateurColor();
 setInterval(() => {indicateurColor();}, 10000);
 
 function checked() {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.classList.add('dark-mode');
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
         document.documentElement.classList.add('light-mode');
     }
 }   
 checked();
-
-// function btnChecked() {
-//     if (document.documentElement.classList.contains('dark-mode')) {
-//         document.documentElement.classList.remove('dark-mode');
-//         document.documentElement.classList.add('light-mode');
-//     } else {
-//         document.documentElement.classList.remove('light-mode');
-//         document.documentElement.classList.add('dark-mode');
-//     }
-// }
 
 function sliderJs(id, num_value) {
     // change valeur du volume des bases
