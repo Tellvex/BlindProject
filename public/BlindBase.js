@@ -15,7 +15,7 @@ async function indicateurColor() {
             document.getElementById(`buttonBase${i}`).style.backgroundColor = "green";
             document.getElementById(`buttonBase${i}`).status = BASE_ALLUME;
         } else {
-            document.getElementById(`buttonBase${i}`).style.backgroundColor = "red";
+            document.getElementById(`buttonBase${i}`).style.backgroundColor = "white";
             document.getElementById(`buttonBase${i}`).status = BASE_ETEINTE;
         }
     }
@@ -189,13 +189,3 @@ function file_upload(e) {
     formData.append("file", file);
     fetch(`/api/upload/${base_id}`, { method: "POST", body: formData });
 }
-
-var fileInput = document.getElementById('file_input');
-var labelText = document.querySelector('label[for=file_input]').textContent;
-
-fileInput.addEventListener('change', function() {
-  fileInput.value = '';
-  fileInput.type = '';
-  fileInput.type = 'file';
-  document.querySelector('label[for=file_input]').textContent = labelText;
-});

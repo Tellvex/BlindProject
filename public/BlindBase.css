@@ -476,5 +476,5 @@ input:checked + .slider2:before {
     border: none;
     margin-left: 8px;
     margin-top: 3px;
-    font-size: smaller;
+    font-size: x-small;
 }
