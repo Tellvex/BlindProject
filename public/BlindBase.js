@@ -183,10 +183,19 @@ document.getElementById("file_input2").addEventListener('change', file_upload);
 document.getElementById("file_input3").addEventListener('change', file_upload);
 
 function file_upload(e) {
-    console.log(e);
     let base_id = e.target.id.at(-1);
     let file = e.target.files[0];
     let formData = new FormData();
     formData.append("file", file);
     fetch(`/api/upload/${base_id}`, { method: "POST", body: formData });
 }
+
+var fileInput = document.getElementById('file_input');
+var labelText = document.querySelector('label[for=file_input]').textContent;
+
+fileInput.addEventListener('change', function() {
+  fileInput.value = '';
+  fileInput.type = '';
+  fileInput.type = 'file';
+  document.querySelector('label[for=file_input]').textContent = labelText;
+});

@@ -31,8 +31,9 @@
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider0" oninput="sliderJs('slider0', '.value0')" >
                                     </div>
-                                    <div>
-                                          <input type="file" accept="audio/*" name="file_input" id="file_input0" class="audio_file">
+                                    <div class="boxAudioFile">
+                                          <input type="button" id="fake" class="fake_audio_file" onclick="document.getElementById('file_input0').click()" value="Upload audio file">
+                                          <input type="file" accept="audio/*" name="file_input" id="file_input0" class="audio_file" >
                                     </div>
                               </div>
                         </p>
@@ -46,7 +47,8 @@
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider1" oninput="sliderJs('slider1', '.value1')">
                                     </div>
-                                    <div>
+                                    <div class="boxAudioFile">
+                                          <input type="button" class="fake_audio_file" onclick="document.getElementById('file_input1').click()" value="Upload audio file">
                                           <input type="file" accept="audio/*" name="file_input" id="file_input1" class="audio_file">
                                     </div>
                               </div>
@@ -61,7 +63,8 @@
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider2" oninput="sliderJs('slider2', '.value2')">
                                     </div>
-                                    <div>
+                                    <div class="boxAudioFile">
+                                          <input type="button" class="fake_audio_file" onclick="document.getElementById('file_input2').click()" value="Upload audio file">
                                           <input type="file" accept="audio/*" name="file_input" id="file_input2" class="audio_file">
                                     </div>
                               </div>
@@ -76,7 +79,8 @@
                                     <div class="slider">
                                           <input type="range" min="0" max="100" value="0" id="slider3" oninput="sliderJs('slider3', '.value3')">
                                     </div>
-                                    <div>
+                                    <div class="boxAudioFile">
+                                          <input type="button" class="fake_audio_file" onclick="document.getElementById('file_input3').click()" value="Upload audio file">
                                           <input type="file" accept="audio/*" name="file_input" id="file_input3" class="audio_file">
                                     </div>
                               </div>

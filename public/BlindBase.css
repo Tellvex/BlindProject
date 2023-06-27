@@ -39,7 +39,7 @@
 .show_arrow1 .etat1,
 .show_arrow2 .etat2,
 .show_arrow3 .etat3 {
-    border: solid 1px var(--font-color);
+    border: solid 2px var(--font-color);
 }
 body {
     background-color: var(--bg-color);
@@ -53,6 +53,9 @@ body {
     outline: none;
     margin: 0;
     padding: 0;
+}
+p {
+    font-weight: bold;
 }
 /* terrain de baseball avec bases */
 /* terrain de baseball / carré vert */
@@ -263,6 +266,9 @@ body {
     font-size: 1.6rem;
     transition: all 0.5s ease-in-out;
 }
+.navbar__link > p:first-child {
+    margin-top: -3px;
+}
 /* position logo */
 .logo {
     display: flex;
@@ -389,10 +395,11 @@ input:checked + .slider2:before {
 }
 /* modification valeur volume */
 .slider {
-    margin-top: 2px;
     width: 100px;
     height: 18px;
-    margin-left: 14px;
+    margin-top: 3px;
+    margin-left: 12px;
+    margin-bottom: 2px;
 }
 #slider0,
 #slider1,
@@ -445,11 +452,29 @@ input:checked + .slider2:before {
 .show_arrow2 .etat2,
 .show_arrow3 .etat3 {
     padding-bottom: 10px;
-    max-height: 100px;
+    max-height: 115px;
+    height: 115px;
     border-radius: 18px;
+}
+.boxAudioFile {
+    height: 30px;
+    width: 115px;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 .audio_file{    
     border-radius: 25px;
     height: 20px;
+    width: 115px;
+    border: none;
+    display: none;
+}
+.fake_audio_file{    
+    border-radius: 25px;
+    height: 20px;
     width: 100px;
+    border: none;
+    margin-left: 8px;
+    margin-top: 3px;
+    font-size: smaller;
 }
