@@ -3,7 +3,7 @@ const BASES = [
     {
         ip: "blind1.local",
         soundcard: 1,
-        control: "Speaker",
+        control: "Headphone",
     },
     {
         ip: "blind2.local",
@@ -21,13 +21,14 @@ const BASES = [
         control: "Speaker",
     },
 ];
-const DEFAULT_FILE = "/usr/share/sounds/alsa/Front_Center.wav";
 
 const { NodeSSH } = require("node-ssh");
+const { exec } = require("child_process");
 const express = require("express");
 const app = express();
+const multer = require("multer");
 
-// array of { id: number, connection: ssh_connection, is_playing: bool, volume: number, file: string, soundcard: number, control: string }
+// array of { id: number, ip: string, connection: ssh_connection, is_playing: bool, volume: number, soundcard: number, control: string }
 let bases = [];
 
 async function start() {
@@ -40,12 +41,13 @@ async function start() {
                 username: "pi",
                 privateKeyPath: `${process.env.HOME}/.ssh/id_rsa`,
             });
+            connection.exec("rm", ["snd_pid"]).catch(() => {});
             let base = {
                 id: i,
+                ip,
                 connection,
                 is_playing: false,
                 volume: 0,
-                file: DEFAULT_FILE,
                 soundcard: BASES[i].soundcard,
                 control: BASES[i].control,
             };
@@ -157,6 +159,19 @@ app.post(
         base.volume = volume;
         set_base_volume(base, volume);
         res.end();
+    }
+);
+
+app.post(
+    "/api/upload/:n",
+    base_by_id_middleware,
+    multer({ dest: "uploads/" }).single("file"),
+    (req, res) => {
+        let extension = req.file.originalname.split('.').at(-1);
+        console.log(extension);
+        exec(`ffmpeg -i ${req.file.path} sound.wav`);
+        exec(`scp sound.wav pi@${req.base.ip}:/home/pi/sound.wav`);
+        res.status(200).end();
     }
 );
 

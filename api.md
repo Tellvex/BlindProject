@@ -54,3 +54,7 @@
         "volume": number
     }
     ```
+
+    ### POST /api/upload/n:
+    _La base n va jouer le son uploader_
+    Le body est un fichier son.
