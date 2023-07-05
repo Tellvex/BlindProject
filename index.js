@@ -13,12 +13,12 @@ const BASES = [
     {
         ip: "blind3.local",
         soundcard: 1,
-        control: "Speaker",
+        control: "Headphone",
     },
     {
         ip: "blind4.local",
         soundcard: 1,
-        control: "Speaker",
+        control: "Headphone",
     },
 ];
 
@@ -167,8 +167,6 @@ app.post(
     base_by_id_middleware,
     multer({ dest: "uploads/" }).single("file"),
     (req, res) => {
-        let extension = req.file.originalname.split('.').at(-1);
-        console.log(extension);
         exec(`ffmpeg -i ${req.file.path} sound.wav`);
         exec(`scp sound.wav pi@${req.base.ip}:/home/pi/sound.wav`);
         res.status(200).end();
