@@ -36,7 +36,7 @@
     - `curl -sL https://unofficial-builds.nodejs.org/download/release/v18.16.0/node-v18.16.0-linux-$(uname -m).tar.gz | sudo tar -xz  --strip-components=1 -C /usr/local/`
 - Installer git: `sudo apt-get install git`
 - Installer le serveur:
-    git clone REPO server
+    git clone chrisChampo`\server server
     cd server
     npm install
 - Installer raspap:
