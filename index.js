@@ -56,14 +56,14 @@ async function start() {
             bases.push(base);
             console.log("Connected");
         } catch (e) {
-            console.error(`Failed to connect to ${ip}: ${e}`);
+            console.error(`Failed to connect to ${ip}: ${e}`);  // Erreur de connexion : {ip} -> Raison {e}
         }
     }
 
-    console.log(bases);
+    console.log(bases); // Nombre de bases connectées
 
     app.listen(PORT, () => {
-        console.log(`Started on :${PORT}`);
+        console.log(`Started on :${PORT}`); // Port Listen
     });
 
     setInterval(() => {
